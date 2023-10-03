@@ -1,0 +1,15 @@
+// Function to call the API endpoint to get the ring size guide
+async function getRingSizeGuide() {
+  try {
+    const response = await fetch('YOUR_API_ENDPOINT_URL');
+    if (response.ok) {
+      const data = await response.json();
+      // Process and display the size guide data
+      console.log(data);
+    } else {
+      throw new Error('Failed to fetch data');
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}

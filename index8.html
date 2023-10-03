@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ring Size Calculator</title>
+    <style>
+        /* Your CSS styles here */
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Ring Size Calculator</h1>
+        <p>Find your ring size and explore international size standards.</p>
+    </div>
+    <div class="container">
+        <h2>Instructions</h2>
+        <p>Follow these steps to determine your ring size:</p>
+        <ol>
+            <li>Use the slider to adjust the ring diameter.</li>
+            <li>Select your gender.</li>
+            <li>Click the "Calculate" button to find your ring size.</li>
+        </ol>
+        <label for="diameter">Adjust Ring Diameter:</label>
+        <input type="range" id="diameter" min="0" max="100" step="1" value="50">
+        <div class="circle" id="circle"></div>
+        <div class="circle-size" id="circleSize">Diameter: 50 mm</div> <!-- Display current size -->
+        <label for="gender">Gender:</label>
+        <select id="gender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select>
+        <button id="calculateButton">Calculate</button>
+        <div id="result"></div>
+        <h2>International Ring Size Standards</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Country</th>
+                    <th>Male Size (mm)</th>
+                    <th>Female Size (mm)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>USA & Canada</td>
+                    <td>20.0</td>
+                    <td>17.5</td>
+                </tr>
+                <tr>
+                    <td>UK & Australia</td>
+                    <td>U</td>
+                    <td>M</td>
+                </tr>
+                <!-- Add more countries and sizes as needed -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Function to update circle size based on the range input
+        function updateCircleSize() {
+            const diameter = document.getElementById("diameter").value;
+            const circle = document.getElementById("circle");
+            const circleSizeText = document.getElementById("circleSize");
+            
+            circle.style.width = diameter + "px";
+            circle.style.height = diameter + "px";
+            circleSizeText.textContent = `Diameter: ${diameter} mm`;
+        }
+
+        function calculateRingSize() {
+            updateCircleSize(); // Update the circle size
+            const diameter = parseFloat(document.getElementById("diameter").value);
+            const gender = document.getElementById("gender").value;
+            
+            let ringSize;
+            
+            if (gender === "male") {
+                ringSize = diameter * 0.2; // Adjust this formula as needed
+            } else if (gender === "female") {
+                ringSize = diameter * 0.18; // Adjust this formula as needed
+            }
+            
+            document.getElementById("result").textContent = `Your ring size is approximately ${ringSize.toFixed(2)} mm.`;
+        }
+
+        // Update circle size when the range input changes
+        document.getElementById("diameter").addEventListener("input", updateCircleSize);
+
+        // Add event listener to the Calculate button
+        document.getElementById("calculateButton").addEventListener("click", calculateRingSize);
+    </script>
+</body>
+</html>

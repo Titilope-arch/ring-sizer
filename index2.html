@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ring Size Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            text-align: center;
+            margin-top: 50px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="number"] {
+            width: 60px;
+        }
+        #result {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Ring Size Calculator</h1>
+        <p>Enter your details to find your ring size:</p>
+        <label for="diameter">Ring Diameter (mm):</label>
+        <input type="number" id="diameter" min="0" step="0.1" placeholder="0">
+        <br><br>
+        <label for="gender">Gender:</label>
+        <select id="gender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select>
+        <br><br>
+        <button onclick="calculateRingSize()">Calculate</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function calculateRingSize() {
+            const diameter = parseFloat(document.getElementById("diameter").value);
+            const gender = document.getElementById("gender").value;
+            
+            let ringSize;
+            
+            if (gender === "male") {
+                ringSize = diameter * 0.2; // Adjust this formula as needed
+            } else if (gender === "female") {
+                ringSize = diameter * 0.18; // Adjust this formula as needed
+            }
+            
+            document.getElementById("result").textContent = `Your ring size is approximately ${ringSize.toFixed(2)} mm.`;
+        }
+    </script>
+</body>
+</html>

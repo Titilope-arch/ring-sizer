@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ring Size Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 600px;
+            text-align: center;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="range"] {
+            width: 80%;
+            margin: 10px 0;
+            -webkit-appearance: none;
+            background-color: #ccc;
+            border-radius: 5px;
+            height: 10px;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background-color: #333;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        #result {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .circle {
+            width: 100px;
+            height: 100px;
+            background-color: #333;
+            border-radius: 50%;
+            margin: 20px auto;
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ccc;
+        }
+        th {
+            background-color: #333;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Ring Size Calculator</h1>
+        <p>Find your ring size and explore international size standards.</p>
+    </div>
+    <div class="container">
+        <h2>Instructions</h2>
+        <p>Follow these steps to determine your ring size:</p>
+        <ol>
+            <li>Use the slider to adjust the ring diameter.</li>
+            <li>Select your gender.</li>
+            <li>Click the "Calculate" button to find your ring size.</li>
+        </ol>
+        <label for="diameter">Adjust Ring Diameter:</label>
+        <input type="range" id="diameter" min="0" max="100" step="1" value="50">
+        <div class="circle" id="circle"></div>
+        <label for="gender">Gender:</label>
+        <select id="gender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select>
+        <button onclick="calculateRingSize()">Calculate</button>
+        <div id="result"></div>
+        <h2>International Ring Size Standards</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Country</th>
+                    <th>Male Size (mm)</th>
+                    <th>Female Size (mm)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>USA & Canada</td>
+                    <td>20.0</td>
+                    <td>17.5</td>
+                </tr>
+                <tr>
+                    <td>UK & Australia</td>
+                    <td>U</td>
+                    <td>M</td>
+                </tr>
+                <!-- Add more countries and sizes as needed -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Function to update circle size based on the range input
+        function updateCircleSize() {
+            const diameter = document.getElementById("diameter").value;
+            const circle = document.getElementById("circle");
+            circle.style.width = diameter + "px";
+            circle.style.height = diameter + "px";
+        }
+
+        function calculateRingSize() {
+            updateCircleSize(); // Update the circle size
+            const diameter = parseFloat(document.getElementById("diameter").value);
+            const gender = document.getElementById("gender").value;
+            
+            let ringSize;
+            
+            if (gender === "male") {
+                ringSize = diameter * 0.2; // Adjust this formula as needed
+            } else if (gender === "female") {
+                ringSize = diameter * 0.18; // Adjust this formula as needed
+            }
+            
+            document.getElementById("result").textContent = `Your ring size is approximately ${ringSize.toFixed(2)} mm.`;
+        }
+
+        // Update circle size when the range input changes
+        document.getElementById("diameter").addEventListener("input", updateCircleSize);
+    </script>
+</body>
+</html>
